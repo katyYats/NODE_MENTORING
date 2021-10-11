@@ -1,7 +1,7 @@
-const fs = require("fs");
-const csv = require("csvtojson");
+import fs from "fs";
+import csv from "csvtojson";
 
-const readStream = fs.createReadStream("task2/csv/example.csv");
+const readStream = fs.createReadStream("task2/csv/nodejs-hw1-ex1.csv");
 const writeStream = fs.createWriteStream("task2/nodejs-hw1-ex1.txt");
 
 const handleError = (e) => {
@@ -11,7 +11,7 @@ const handleError = (e) => {
 };
 
 readStream
-  .pipe(csv())
+  .pipe(csv({ ignoreColumns: /(Amount)/ }))
   .on("error", (e) => {
     handleError(e);
   })
